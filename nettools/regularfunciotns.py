@@ -1,9 +1,10 @@
 def menu_principal():
     print('=*' * 40)
     print('Digite o número referente a opção desejada: ')
-    print('[ 1 ] - Scan de Rede')
-    print('[ 2 ] - Scan de Portas Abertas para 1 endereço')
-    print('[ 3 ] - Scan de Portas Abertas para todos os endeços online')
+    print("[ 1 ] - Scan de Rede utilizando icmp (+ lento)")
+    print('[ 2 ] - Scan de Rede utilizando tcp (+ Rápido)')
+    print('[ 3 ] - Scan de Portas Abertas para 1 endereço')
+    print('[ 4 ] - Scan de Portas Abertas para todos os endeços online')
     print('[ 0 ] Sair do programa')
     print('=*' * 40)
     try:
