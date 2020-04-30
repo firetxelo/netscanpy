@@ -12,8 +12,9 @@ while True:
             print(f'O IP {ip} está Online')
             listaonline.append(ip)
     elif option == 2:
-        ipdigitado = regularfunciotns.digita_ip()
-        netfunctions.tcp_discovery(ipdigitado)
+        pass
+        #ipdigitado = regularfunciotns.digita_ip()
+        #netfunctions.tcp_discovery(ipdigitado)
     elif option == 3:
         print('Escolheu a opção 3')
     elif option == 4:
