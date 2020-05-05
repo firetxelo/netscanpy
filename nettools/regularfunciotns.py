@@ -1,4 +1,6 @@
 import socket
+import fcntl
+import struct
 
 def menu_principal():
     print('=*' * 40)
@@ -24,8 +26,7 @@ def digita_ip():
         ipuser = str(input('Ou digite 0 para escolher automaticamente a rede vinculada ao hostname do computador : '))
         if ipuser == '0':
             try:
-                host_name = socket.gethostname()
-                host_ip = socket.gethostbyname(host_name)
+                host_ip = escolhe_interface()
                 inet_aton(host_ip)
                 ipuser = host_ip[0:host_ip.rfind(".")] + '.0'
                 ipverif01 = ipuser.split('.')
@@ -55,3 +56,21 @@ def digita_ip():
                 return ipdigitado
         except:
             print('Digite um valo inteiro entre 1 e 32!')
+
+
+def escolhe_interface():
+    try:
+        ifinfo = socket.if_nameindex()
+        while True:
+            for interf in range(0,len(ifinfo)):
+                print(f"Digite {ifinfo[interf][0]} para escolher a interface {ifinfo[interf][1]}")
+            ifoption = int(input('Qual sua escolha: '))
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            ifname = ifinfo[ifoption -1][1]
+            return socket.inet_ntoa(fcntl.ioctl(
+                s.fileno(),
+                0x8915,
+                struct.pack('256s', bytes(ifname[:15], 'utf-8'))
+                )[20:24])
+    except:
+        return "Não foi possível determinar o endereço da interface"
